@@ -62,5 +62,4 @@ for question, data in questions_dict.items():
         Radiobutton(main_window, text=option,
                     variable=feedback_scores[idx-1], value=data["weights"][i]).grid(row=idx-1, column=10)
 
-
 main_window.mainloop()
