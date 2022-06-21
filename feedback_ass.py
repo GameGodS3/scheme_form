@@ -15,27 +15,27 @@ from tkinter import messagebox
 main_window = Tk()
 questions_dict = {
     "knowledge of the teacher in the subject": {
-        "options": ["excellent", "good", "fair", "poor", "i don't know", "rather not answer"],
+        "options": ["excellent", "good", "fair", "poor", "blank"],
         "weights": [4, 3, 2, 1, 0, -1]
     },
     "clarity and understandability of teacher's explanations": {
-        "options": ["excellent", "good", "fair", "poor", "i don't know", "rather not answer"],
+        "options": ["excellent", "good", "fair", "poor", "blank"],
         "weights": [4, 3, 2, 1, 0, -1]
     },
     "teacher's willingness to help": {
-        "options": ["excellent", "good", "fair", "poor", "i don't know", "rather not answer"],
+        "options": ["excellent", "good", "fair", "poor", "blank"],
         "weights": [4, 3, 2, 1, 0, -1]
     },
     "teacher's ability to organize lectures": {
-        "options": ["excellent", "good", "fair", "poor", "i don't know", "rather not answer"],
+        "options": ["excellent", "good", "fair", "poor", "blank"],
         "weights": [4, 3, 2, 1, 0, -1]
     },
     "overall teaching effectiveness of the teacher": {
-        "options": ["excellent", "good", "fair", "poor", "i don't know", "rather not answer"],
+        "options": ["excellent", "good", "fair", "poor", "blank"],
         "weights": [4, 3, 2, 1, 0, -1]
     },
     "whether the teacher provides videos, PPTs or notes without proper explanation": {
-        "options": ["yes", "no", "i don't know"],
+        "options": ["yes", "no"],
         "weights": [-1, 1, 0]
     },
     "approximate percentage of classes not engaged by the teacher": {
@@ -202,7 +202,7 @@ def select9():
     total = total+mark9
 
 
-def select10():
+def select99():
     if(feedback_scores[9].get() == 37):
         mark10 = 20
     elif(feedback_scores[9].get() == 38):
@@ -213,7 +213,7 @@ def select10():
     total = total+mark10
 
 
-def select11():
+def select999():
     if(feedback_scores[10].get() == 40):
         mark11 = 20
     elif(feedback_scores[10].get() == 41):
@@ -223,6 +223,10 @@ def select11():
     global total
     total = total+mark11
 
+
+calculation_functions = [f for fname, f in sorted(
+    globals().items()) if callable(f) and fname.startswith("select")]
+print(calculation_functions)
 
 total = 0
 mark1 = 0
@@ -271,7 +275,7 @@ for question, data in questions_dict.items():
     option_col_idx = 1
     for i, option in enumerate(data["options"]):
         Radiobutton(main_window, text=option.capitalize(),
-                    variable=feedback_scores[question_idx], value=default_val).grid(row=line_count, column=option_col_idx)
+                    variable=feedback_scores[question_idx], value=default_val, command=calculation_functions[question_idx]).grid(row=line_count, column=option_col_idx)
         option_col_idx += 1
         default_val += 1
 
