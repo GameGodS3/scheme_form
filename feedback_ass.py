@@ -74,15 +74,8 @@ def submit():
             else:
                 global mark8
                 global total
-                if(mark8 == 0):
-                    messagebox.showinfo(
-                        "RESULT", "The score is:"+str(round(total, 2))+"/200\nspeed of presentaion is just right")
-                elif mark8 > 0:
-                    messagebox.showinfo(
-                        "RESULT", "The score is:"+str(round(total, 2))+"/200\nspeed of presentaion should be reduced")
-                else:
-                    messagebox.showinfo("RESULT", "The score is:"+str(
-                        round(total, 2))+"/200\nspeed of presentaion should be increased")
+                messagebox.showinfo(
+                    "RESULT", "The score is:"+str(round(total, 2))+"/200\n")
 
 
 def select1():
