@@ -1,7 +1,6 @@
 from tkinter import *
 
 main_window = Tk()
-main_window.geometry("700x700")
 
 questions_dict = {
     "knowledge of the teacher in the subject": {
@@ -50,16 +49,35 @@ questions_dict = {
     }
 }
 
-idx = 1
+line_count = 0
+question_idx = 0
 
 feedback_scores = [IntVar(main_window, 0) for i in range(len(questions_dict))]
 
 for question, data in questions_dict.items():
-    Label(main_window, text=question).grid(row=idx-1, column=1)
-    if idx < len(questions_dict):
-        idx += 1
+    question_label = Label(main_window, text=question, anchor="w")
+    question_label.grid(row=line_count, column=0)
+    Label(main_window, text="").grid(row=line_count, column=1)
+    line_count += 1
+
+    option_col_idx = 0
     for i, option in enumerate(data["options"]):
         Radiobutton(main_window, text=option,
-                    variable=feedback_scores[idx-1], value=data["weights"][i]).grid(row=idx-1, column=10)
+                    variable=feedback_scores[question_idx], value=data["weights"][i]).grid(row=line_count, column=option_col_idx)
+        option_col_idx += 1
+
+    line_count += 1
+    question_idx += 1
+
+
+# Label(main_window, text="hello world").grid(row=0, column=0)
+# Radiobutton(main_window, text="0",
+#             variable=feedback_scores[0]).grid(row=1, column=0)
+# Radiobutton(main_window, text="1",
+#             variable=feedback_scores[1]).grid(row=1, column=1)
+# Radiobutton(main_window, text="2",
+#             variable=feedback_scores[2]).grid(row=1, column=2)
+# Label(main_window, text="hello world2").grid(row=2, column=0)
+
 
 main_window.mainloop()
